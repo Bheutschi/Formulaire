@@ -17,7 +17,9 @@ foreach ($user as $row) {
     echo "{$row['first_name']} - {$row['last_name']} - {$row['street']} - {$row['postal_code']} - {$row['city']} - {$row['name']} - {$row['birthdate']}- {$row['email']} - {$row['phone']} - {$row['sex']} - {$row['civility']}<br>  ";
 }
 ?>
-
+<table>
+    <tr></tr>
+</table>
 <div>
     <p><a href="index.php">Go to sign in >></a></p>
 </div>
