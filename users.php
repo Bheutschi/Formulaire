@@ -1,5 +1,7 @@
 <?php
 require_once 'dbconnexion.php';
+require_once 'header.php';
+require_once 'nav.php';
 
 $stmtUserAndAddress = $pdo->prepare(
     'SELECT * FROM users_has_adresses
@@ -11,35 +13,62 @@ $stmtUserAndAddress = $pdo->prepare(
                on u.id_user = users_has_adresses.users_id_user'
 );
 $stmtUserAndAddress->execute();
-$user = $stmtUserAndAddress->fetchAll();
 
-foreach ($user as $row) {
+/*foreach ($user as $row) {
     echo "{$row['first_name']} - {$row['last_name']} - {$row['street']} - {$row['postal_code']} - {$row['city']} - {$row['name']} - {$row['birthdate']}- {$row['email']} - {$row['phone']} - {$row['sex']} - {$row['civility']}<br>  ";
-}
-$stmt = $pdo->query('SELECT * FROM users');
-while ($row = $stmt->fetch())
-{?>
-   <table>
-    <tr><?php echo $row['first_name'] . "\n"?></tr>
-    <tr><?php echo $row['last_name'] . "\n"?></tr>
-    <tr><?php echo $row['street'] . "\n"?></tr>
-    <tr><?php echo $row['postal_code'] . "\n"?></tr>
-    <tr><?php echo $row['city'] . "\n"?></tr>
-    <tr><?php echo $row['name'] . "\n"?></tr>
-    <tr><?php echo $row['birthdate'] . "\n"?></tr>
-    <tr><?php echo $row['email'] . "\n"?></tr>
-    <tr><?php echo $row['phone'] . "\n"?></tr>
-    <tr><?php echo $row['sex'] . "\n"?></tr>
-    <tr><?php echo $row['civility'] . "\n"?></tr>
-</table>
+}*/
+while ($user = $stmtUserAndAddress->fetch()) {
+    ?>
+
+    <div class="columns is-half">
+        <div class="card">
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-96x96">
+                            <img src="https://w7.pngwing.com/pngs/504/252/png-transparent-pepe-the-frog-television-meme-meme-television-vertebrate-grass.png"
+                                 alt="">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="title is-4"><?= $user['first_name'] . " " . $user['last_name'] ?></p>
+                        <p class="subtitle is-6"><?= $user['email'] ?></p>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <p class="subtitle is-6"><?= " + " . $user['phone'] ?></p>
+                    <p class="subtitle is-6"><?= $user['birthdate'] ?></p>
+                    <p class="subtitle is-6"><?= $user['street'] . " - " . $user['postal_code'] . " - " . $user['city'] ?></p>
+                    <p class="subtitle is-6"><?= $user['name'] ?></p>
+                </div>
+                <div class="card">
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">Edit</a>
+                        <a href="#" class="card-footer-item">Delete</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table>
+        <tr><?php echo $row['first_name'] . "\n" ?></tr>
+        <tr><?php echo $row['last_name'] . "\n" ?></tr>
+        <tr><?php echo $row['street'] . "\n" ?></tr>
+        <tr><?php echo $row['postal_code'] . "\n" ?></tr>
+        <tr><?php echo $row['city'] . "\n" ?></tr>
+        <tr><?php echo $row['name'] . "\n" ?></tr>
+        <tr><?php echo $row['birthdate'] . "\n" ?></tr>
+        <tr><?php echo $row['email'] . "\n" ?></tr>
+        <tr><?php echo $row['phone'] . "\n" ?></tr>
+        <tr><?php echo $row['sex'] . "\n" ?></tr>
+        <tr><?php echo $row['civility'] . "\n" ?></tr>
+    </table>
+    <?php
+} ?>
+
 <?php
-}?>
 
-
-<table>
-    <tr><?php echo $row['first_name']?></tr>
-</table>
-<div>
-    <p><a href="index.php">Go to sign in >></a></p>
-</div>
 

@@ -1,6 +1,7 @@
 <?php
 require_once 'dbconnexion.php';
 require_once 'header.php';
+require_once 'nav.php';
 
 //Au moment ou l'on va appuyer sur le bouton envoyer le code va s'executer
 if (isset($_POST['submit'])) {
@@ -66,54 +67,110 @@ if (isset($_POST['submit'])) {
 
 }
 ?>
+
 <form action="index.php" method="post">
-    <label for="sex" id="sex">Votre sexe</label>
-    <select name="sex" id="sex">
-        <option value="0">Monsieur</option>
-        <option value="1">Madame</option>
-    </select>
-    <label for="civility" id="civility">Votre civilité</label>
-    <select name="civility" id="civility">
-        <option value="0">Célibataire</option>
-        <option value="1">Marié</option>
-        <option value="2">Divorcé</option>
-        <option value="3">Veuf</option>
-    </select><br>
+    <div class="column is-2 is-offset-5 ">
+        <div class="select is-normal">
+            <label for="sex" id="sex"></label>
+            <select name="sex" id="sex">
+                <option value="0">Monsieur</option>
+                <option value="1">Madame</option>
+            </select>
+        </div>
 
-    <label for="first_name">Prénom<br><input type="text" name="first_name"
-                                             placeholder="Entrer votre prénom"><br><br>
+        <div class="select is-normal">
+            <label for="civility" id="civility"></label>
+            <select name="civility" id="civility">
+                <option value="0">Célibataire</option>
+                <option value="1">Marié</option>
+                <option value="2">Divorcé</option>
+                <option value="3">Veuf</option>
+            </select>
+        </div>
+        <div class="field">
+            <label class="label" for="first_name">Prénom</label>
+            <div class="control">
+                <label>
+                    <input class="input" type="text" placeholder="Entrez votre prénom" name="first_name">
+                </label>
+            </div>
+        </div>
 
-    </label>
-    <label for="last_name">Nom<br><input type="text" name="last_name" placeholder="Entrer votre nom de famille"><br><br>
-    </label>
-    <label for="birthdate">Anniversaire
-        <br><input type="date" name="birthdate" placeholder="Entrer votre date d'anniversaire"><br><br>
-    </label>
-    <label for="email">Email
-        <br><input type="email" name="email" placeholder="Entrer votre email"><br><br>
-    </label>
-    <label for="street">Adresse
-        <br><input type="text" name="street" placeholder="Entrer votre adresse"><br><br>
-    </label>
-    <label for="npa">Code postal
-        <br><input type="number" name="npa" placeholder="Entrer votre code postal"><br><br>
-    </label>
-    <label for="city">Ville
-        <br><input type="text" name="city" placeholder="Entrer votre ville"><br><br>
-    </label>
-    <label for="country">Pays
-        <br><input type="text" name="country" placeholder="Sélectionner votre pays"><br><br>
-    </label>
-    <label for="phone">N° de téléphone
-        <br><input type="tel" name="phone" maxlength="12" placeholder="Entrer votre N° de téléphone"><br><br>
-    </label>
-    <input id="submit_id" type="submit" name="submit" value="Entrez"><br><br>
+        <div class="field">
+            <label class="label" for="last_name">Nom</label>
+            <div class="control">
+                <label>
+                    <input class="input" type="text" placeholder="Entrez votre nom" name="last_name">
+                </label>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="birthdate">Date de naissance</label>
+            <div class="control">
+                <label>
+                    <input class="input" type="date" name="birthdate">
+                </label>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="email">Adresse mail</label>
+            <div class="control">
+                <label>
+                    <input class="input" type="email" placeholder="Entrez votre email" name="email">
+                </label>
+            </div>
+        </div>
+        <div class="field">
+            <label for="street" class="label">Adresse</label>
+            <div class="control">
+                <label>
+                    <input name="street" class="input " type="text" placeholder="Entrer votre adresse">
+                </label>
+            </div>
+        </div>
+        <div class="field">
+            <label for="npa" class="label">Code postal</label>
+            <div class="control">
+                <label>
+                    <input name="npa" class="input" type="number" placeholder="Entrer votre code postal">
+                </label>
+            </div>
+        </div>
+        <div class="field">
+            <label for="city" class="label">Ville</label>
+            <div class="control">
+                <label>
+                    <input name="city" class="input" type="text" placeholder="Entrez le nom de votre ville">
+                </label>
+            </div>
+        </div>
+        <div class="field">
+            <label for="country" class="label">Pays</label>
+            <div class="control">
+                <label>
+                    <input name="country" class="input" type="text" placeholder="Entrez le nom de votre pays">
+                </label>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="phone" class="label">N° de téléphone</label>
+            <div class="control">
+                <label>
+                    <input class="input" type="text" placeholder="Entrer votre N° de téléphone" name="phone">
+                </label>
+
+            </div>
+        </div>
+
+        <div class="control">
+            <input id="submit_id" name="submit" type="submit" class="input is-primary" value="Entrez">
+        </div>
+    </div>
 </form>
+
 <?php
 ?>
 
 
-<div>
-    <p><a href="users.php">Go to events >></a></p>
-</div>
 
