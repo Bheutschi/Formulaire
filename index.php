@@ -1,5 +1,7 @@
 <?php
 require_once 'dbconnexion.php';
+require_once 'header.php';
+
 //Au moment ou l'on va appuyer sur le bouton envoyer le code va s'executer
 if (isset($_POST['submit'])) {
 
@@ -58,8 +60,8 @@ if (isset($_POST['submit'])) {
         'INSERT INTO users_has_adresses (users_id_user, adresses_id_adress) 
                 VALUES (:users_id_user, :adresses_id_adress)');
     $stmt_users_has_adresses->execute([
-       'users_id_user' => $id_user,
-       'adresses_id_adress' => $id_adress,
+        'users_id_user' => $id_user,
+        'adresses_id_adress' => $id_adress,
     ]);
 
 }
