@@ -25,10 +25,10 @@ require_once 'header.php';
             <div class="navbar-item">
                 <div class="buttons">
                     <a class="button is-primary">
-                        <strong>Sign up</strong>
+                        <strong>Connexion</strong>
                     </a>
                     <a class="button is-light">
-                        Log in
+                        S'inscrire
                     </a>
                 </div>
             </div>
