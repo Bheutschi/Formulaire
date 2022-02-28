@@ -1,3 +1,4 @@
+
 <?php
 require_once 'header.php';
 require_once 'dbconnexion.php';
@@ -6,81 +7,78 @@ require_once 'nav.php';
 $getUserId = $_GET['id-user'];
 
 if (!$getUserId) {
-header('Location: index.php');
+    header('Location: index.php');
 }
 $stmtGetUserId = $pdo->prepare(
-'SELECT * FROM users_has_adresses
-INNER JOIN adresses a
-on a.id_adress = users_has_adresses.adresses_id_adress
-INNER JOIN countries c
-on c.id_country = a.countries_id_country
-INNER JOIN users u
-on u.id_user = users_has_adresses.users_id_user
-WHERE id_user = :id'
+    'SELECT * FROM users_has_adresses
+           INNER JOIN adresses a 
+               on a.id_adress = users_has_adresses.adresses_id_adress
+          INNER JOIN countries c 
+               on c.id_country = a.countries_id_country
+          INNER JOIN users u 
+               on u.id_user = users_has_adresses.users_id_user
+               WHERE id_user = :id'
 );
 $stmtGetUserId->execute(
-["id" => $getUserId]
+    ["id" => $getUserId]
 );
 $user = $stmtGetUserId->fetch();
 
 //Au moment ou l'on va appuyer sur le bouton envoyer le code va s'executer
 if (isset($_POST['submit'])) {
 
-$country = ucfirst(strtolower(trim($_POST['country'])));
+    $country = ucfirst(strtolower(trim($_POST['country'])));
 
-//Permet de tester si le pays existe dans ma base de donnée
-$stmt_country_exist_or_not = $pdo->prepare('SELECT * FROM countries WHERE name = :country ');
-$stmt_country_exist_or_not->execute([
-'country' => $country
-]);
-$data = $stmt_country_exist_or_not->fetchAll();
+    //Permet de tester si le pays existe dans ma base de donnée
+    $stmt_country_exist_or_not = $pdo->prepare('SELECT * FROM countries WHERE name = :country ');
+    $stmt_country_exist_or_not->execute([
+        'country' => $country
+    ]);
+    $data = $stmt_country_exist_or_not->fetchAll();
 
 
-if ($data) {
-$id_country = $data[0]['id_country'];
+    if ($data) {
+        $id_country = $data[0]['id_country'];
 
-} else {
+    } else {
 
-$stmt_country = $pdo->prepare(
-'INSERT INTO countries (name)VALUE(:name)');
-$stmt_country->execute([
-'name' => $country,
-]);
-//Stocker dans une variable l'identifiant de la dernière ligne insérer pour ensuite la récuperer
-$id_country = $pdo->lastInsertId();
-}
+        $stmt_country = $pdo->prepare(
+            'INSERT INTO countries (name)VALUE(:name)');
+        $stmt_country->execute([
+            'name' => $country,
+        ]);
+        //Stocker dans une variable l'identifiant de la dernière ligne insérer pour ensuite la récuperer
+        $id_country = $pdo->lastInsertId();
+    }
 
 //Prepapre l'execution pour inserer mes différents champs
-$stmt_adress = $pdo->prepare(
-'UPDATE adresses SET
-street=:street,
-postal_code=:postal_code,
-city=:city
-WHERE countries_id_country=:countries_id_country');
+    $stmt_adress = $pdo->prepare(
+        'UPDATE adresses SET
+                    street=:street,
+                    postal_code=:postal_code, 
+                    city=:city 
+                     WHERE countries_id_country=:countries_id_country');
 // Execute ma requète avec les champs demander
-$stmt_adress->execute([
-'street' => $_POST['street'],
-'postal_code' => $_POST['npa'],
-'city' => $_POST['city'],
-'countries_id_country' => $id_country,
-]);
-$id_adress = $pdo->lastInsertId();
+    $stmt_adress->execute([
+        'street' => $_POST['street'],
+        'postal_code' => $_POST['npa'],
+        'city' => $_POST['city'],
+        'countries_id_country' => $id_country,
+    ]);
+    $id_adress = $pdo->lastInsertId();
 
-$stmt = $pdo->prepare(
-'UPDATE users SET first_name=:first_name, last_name=:last_name, birthdate=:birthdate, email=:email, phone=:phone, civility=:civility, sex=:sex WHERE id_user=:id');
-$stmt->execute([
-'first_name' => $_POST['first_name'],
-'last_name' => $_POST['last_name'],
-'birthdate' => $_POST['birthdate'],
-'email' => $_POST['email'],
-'phone' => $_POST['phone'],
-'civility' => $_POST['civility'],
-'sex' => $_POST['sex'],
-'id' => $getUserId,
-]);
-    if ($stmt->execute()){
-        header('location: users.php');
-    }
+    $stmt = $pdo->prepare(
+        'UPDATE users SET first_name=:first_name, last_name=:last_name, birthdate=:birthdate, email=:email, phone=:phone, civility=:civility, sex=:sex WHERE id_user=:id');
+    $stmt->execute([
+        'first_name' => $_POST['first_name'],
+        'last_name' => $_POST['last_name'],
+        'birthdate' => $_POST['birthdate'],
+        'email' => $_POST['email'],
+        'phone' => $_POST['phone'],
+        'civility' => $_POST['civility'],
+        'sex' => $_POST['sex'],
+        'id' => $getUserId,
+    ]);
 
 }
 
@@ -100,10 +98,10 @@ $stmt->execute([
         <div class="select is-normal">
             <label for="civility" id="civility"></label>
             <select name="civility" id="civility">
-                <option value="0"<?= ($user['civility'] == "0") ? "selected":""?>>Célibataire</option>
-                <option value="1"<?= ($user['civility'] == "1") ? "selected":""?>>Marié</option>
-                <option value="2"<?= ($user['civility'] == "2") ? "selected":""?>>Divorcé</option>
-                <option value="3"<?= ($user['civility'] == "3") ? "selected":""?>>Veuf</option>
+                <option value="0">Célibataire</option>
+                <option value="1">Marié</option>
+                <option value="2">Divorcé</option>
+                <option value="3">Veuf</option>
             </select>
         </div>
         <div class="field">

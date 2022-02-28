@@ -35,18 +35,12 @@ while ($user = $stmtUserAndAddress->fetch()) {
                             <p class="subtitle is-6"><?= $user['email'] ?></p>
                         </div>
                     </div>
-
-                    <div class="content">
-                        <p class="subtitle is-6"><?= " + " . $user['phone'] ?></p>
-                        <p class="subtitle is-6"><?= $user['birthdate'] ?></p>
-                        <p class="subtitle is-6"><?= $user['street'] . " - " . $user['postal_code'] . " - " . $user['city'] ?></p>
-                        <p class="subtitle is-6"><?= $user['name'] ?></p>
-                    </div>
                     <form action="edit.php" method="get">
                         <div class="card">
                             <footer class="card-footer">
                                 <a class="card-footer-item" href="edit.php?id-user=<?= $user['id_user'] ?>">Edit</a>
                                 <a class="card-footer-item"  href="delete.php?id-user=<?= $user['id_user'] ?>">Delete</a>
+                                <a href="details.php?id-user=<?= $user['id_user'] ?>" class="card-footer-item">Détails</a>
                             </footer>
                         </div>
                     </form>
