@@ -46,7 +46,7 @@ while ($user = $stmtUserAndAddress->fetch()) {
                         <div class="card">
                             <footer class="card-footer">
                                 <a class="card-footer-item" href="edit.php?id-user=<?= $user['id_user'] ?>">Edit</a>
-                                <a class="card-footer-item" href="#">Delete</a>
+                                <a class="card-footer-item"  href="delete.php?id-user=<?= $user['id_user'] ?>">Delete</a>
                             </footer>
                         </div>
                     </form>
@@ -73,5 +73,7 @@ while ($user = $stmtUserAndAddress->fetch()) {
 } ?>
 
 <?php
+
+
 
 
